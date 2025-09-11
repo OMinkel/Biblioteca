@@ -3,7 +3,7 @@ import { LibraryProvider } from './contexts/LibraryContext';
 import BookList from './components/BookList';
 import BookForm from './components/BookForm';
 import LibraryStats from './components/LibraryStats';
-import './App.css'; // Asegúrate de tener este archivo CSS para los estilos
+import './styles/App.css';
 
 function App() {
   return (
