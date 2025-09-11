@@ -1,21 +1,31 @@
 import React from 'react';
 import { useLibrary } from '../hooks/useLibrary';
-import BookItem from './BookItem';
 
-const BookList = () => {
-  const { filteredBooks, filter } = useLibrary();
+const BookItem = ({ book }) => {
+  const { removeBook, toggleReadStatus } = useLibrary();
 
-  if (filteredBooks.length === 0) {
-    return <p>No hay libros para mostrar con el filtro actual.</p>;
-  }
+  const handleToggle = () => {
+    toggleReadStatus(book.id);
+  };
+
+  const handleRemove = () => {
+    removeBook(book.id);
+  };
 
   return (
-    <ul className="book-list">
-      {filteredBooks.map(book => (
-        <BookItem key={book.id} book={book} />
-      ))}
-    </ul>
+    <li className={`book-item ${book.isRead ? 'read' : ''}`}>
+      <div>
+        <h4>{book.title}</h4>
+        <p>by {book.author}</p>
+      </div>
+      <div>
+        <button onClick={handleToggle}>
+          {book.isRead ? 'No leído' : 'Marcar como leído'}
+        </button>
+        <button onClick={handleRemove}>Eliminar</button>
+      </div>
+    </li>
   );
 };
 
-export default BookList;
+export default BookItem;
